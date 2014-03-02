@@ -1,12 +1,19 @@
 /*
+emulate-the-f1
+
+Version 1.0
+Christopher Albin Edmonds - christopher@tunecrew.com - http://www.tunecrew.com/
+
+Copyright (C) 2014 Christopher Albin Edmonds where applicable. See license.txt for further details on copyright, licensing and distribution of emulate-the-f1.
+
+Parts of emulate-the-f1 are adapted from the LUFA Library, and are distributed under the following license:
+
              LUFA Library
      Copyright (C) Dean Camera, 2013.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
-*/
 
-/*
   Copyright 2013  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
@@ -33,10 +40,10 @@
  *
  *  This is a header file which is be used to configure some of
  *  the application's compile time options, as an alternative to
- *  specifying the compile time constants supplied through a 
+ *  specifying the compile time constants supplied through a
  *  makefile or build system.
  *
- *  For information on what each token does, refer to the 
+ *  For information on what each token does, refer to the
  *  \ref Sec_Options section of the application documentation.
  */
 

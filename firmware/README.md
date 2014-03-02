@@ -11,7 +11,7 @@ To build the firmware:
 
 - Setup your hardware as described at http://www.tunecrew.com/2013/07/02/emulating-the-traktor-kontrol-f1-part-2/
 
-- Execute make
+- Execute "make"
 
 To load the firmware:
 
@@ -22,6 +22,12 @@ To load the firmware:
 - Execute “make dfu”
 
 - Power cycle the Uno
+
+To see more detail when loading the firmware, I altered the LUFA makefile with the dfu target, localted at lufa/LUFA/build/lufa_dfu.mk and added "--debug 100" to the following lines:
+
+	dfu-programmer $(MCU) erase --debug 100
+	dfu-programmer $(MCU) flash --debug 100 $<
+	dfu-programmer $(MCU) reset --debug 100
 
 To see more discussion on the firmware see http://www.tunecrew.com/2014/03/02/emulating-the-traktor-kontrol-f1-part-3
 

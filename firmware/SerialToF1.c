@@ -1,12 +1,19 @@
 /*
+emulate-the-f1
+
+Version 1.0
+Christopher Albin Edmonds - christopher@tunecrew.com - http://www.tunecrew.com/
+
+Copyright (C) 2014 Christopher Albin Edmonds where applicable. See license.txt for further details on copyright, licensing and distribution of emulate-the-f1.
+
+Parts of emulate-the-f1 are adapted from the LUFA Library, and are distributed under the following license:
+
              LUFA Library
      Copyright (C) Dean Camera, 2013.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
-*/
 
-/*
   Copyright 2013  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
@@ -75,11 +82,11 @@ int main(void)
 	SetupHardware();
 	GlobalInterruptEnable();
 	Serial_Init(38400, false);
-	
+
 	int ReportDataFill = 0;
 
 	for (;;)
-	{		
+	{
 		if (ReportDataFill < F1_REPORT_SIZE)
 		{
 			int16_t DataByte = Serial_ReceiveByte();
@@ -94,7 +101,7 @@ int main(void)
 			ReportDataFill = 0;
 
 			if (USB_DeviceState != DEVICE_STATE_Configured)
-			{			
+			{
 			}
 			else
 			{
@@ -106,7 +113,7 @@ int main(void)
 					// {
 					// 	ReportData[i] = 0x0f;
 					// }
-					// 		
+					//
 					// ReportData[0] = 0x01;
 
 					Endpoint_Write_Stream_LE(&ReportData, sizeof(ReportData), NULL);
@@ -114,7 +121,7 @@ int main(void)
 				}
 			}
 		}
-		
+
 		USB_USBTask();
 	}
 }
@@ -200,7 +207,7 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
 {
 	uint8_t* Data        = (uint8_t*)ReportData;
 	// uint8_t  CurrLEDMask = LEDs_GetLEDs();
-	// 
+	//
 	// Data[0] = ((CurrLEDMask & LEDS_LED1) ? 1 : 0);
 	// Data[1] = ((CurrLEDMask & LEDS_LED2) ? 1 : 0);
 	// Data[2] = ((CurrLEDMask & LEDS_LED3) ? 1 : 0);
@@ -226,19 +233,19 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
 {
 	uint8_t* Data       = (uint8_t*)ReportData;
 	// uint8_t  NewLEDMask = LEDS_NO_LEDS;
-	// 
+	//
 	// if (Data[0])
 	//   NewLEDMask |= LEDS_LED1;
-	// 
+	//
 	// if (Data[1])
 	//   NewLEDMask |= LEDS_LED2;
-	// 
+	//
 	// if (Data[2])
 	//   NewLEDMask |= LEDS_LED3;
-	// 
+	//
 	// if (Data[3])
 	//   NewLEDMask |= LEDS_LED4;
-	// 
+	//
 	// LEDs_SetAllLEDs(NewLEDMask);
 }
 
@@ -246,7 +253,7 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
 // {
 // 	if (USB_DeviceState != DEVICE_STATE_Configured)
 // 	  return;
-// 
+//
 // 	// if (HIDInterfaceInfo->State.PrevFrameNum == USB_Device_GetFrameNumber())
 // 	// {
 // 	// 	#if defined(USB_DEVICE_OPT_LOWSPEED)
@@ -256,58 +263,58 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
 // 	// 	return;
 // 	// 	#endif
 // 	// }
-// 
+//
 // 	Endpoint_SelectEndpoint(F1_OUT_EPADDR);
 // 	uint8_t Data2[SERIAL_EPSIZE];
-// 
+//
 // 	if (Endpoint_IsINReady())
 // 	{
 // 		uint8_t* Data        = (uint8_t*)ReportData;
-// 
+//
 // 		for (int i = 0; i < SERIAL_EPSIZE; i++)
 // 		{
 // 			Data2[i] = 0x00;
 // 		}
-// 		
+//
 // 		Data2[0] = 0x01;
-// 
+//
 // 		Endpoint_Write_Stream_LE(&Data2, sizeof(Data2), NULL);
 // 		Endpoint_ClearIN();
 // 	}
-// 
+//
 	// if (Endpoint_IsReadWriteAllowed())
 	// {
 	// 	uint8_t  ReportINData[HIDInterfaceInfo->Config.PrevReportINBufferSize];
 	// 	uint8_t  ReportID     = 0;
 	// 	uint16_t ReportINSize = 0;
-	// 
+	//
 	// 	memset(ReportINData, 0, sizeof(ReportINData));
-	// 
+	//
 	// 	bool ForceSend         = CALLBACK_HID_Device_CreateHIDReport(HIDInterfaceInfo, &ReportID, HID_REPORT_ITEM_In,
 	// 	                                                             ReportINData, &ReportINSize);
 	// 	bool StatesChanged     = false;
 	// 	bool IdlePeriodElapsed = (HIDInterfaceInfo->State.IdleCount && !(HIDInterfaceInfo->State.IdleMSRemaining));
-	// 
+	//
 	// 	if (HIDInterfaceInfo->Config.PrevReportINBuffer != NULL)
 	// 	{
 	// 		StatesChanged = (memcmp(ReportINData, HIDInterfaceInfo->Config.PrevReportINBuffer, ReportINSize) != 0);
 	// 		memcpy(HIDInterfaceInfo->Config.PrevReportINBuffer, ReportINData, HIDInterfaceInfo->Config.PrevReportINBufferSize);
 	// 	}
-	// 
+	//
 	// 	if (ReportINSize && (ForceSend || StatesChanged || IdlePeriodElapsed))
 	// 	{
 	// 		HIDInterfaceInfo->State.IdleMSRemaining = HIDInterfaceInfo->State.IdleCount;
-	// 
+	//
 	// 		Endpoint_SelectEndpoint(HIDInterfaceInfo->Config.ReportINEndpoint.Address);
-	// 
+	//
 	// 		if (ReportID)
 	// 		  Endpoint_Write_8(ReportID);
-	// 
+	//
 	// 		Endpoint_Write_Stream_LE(ReportINData, ReportINSize, NULL);
-	// 
+	//
 	// 		Endpoint_ClearIN();
 	// 	}
-	// 
+	//
 	// 	HIDInterfaceInfo->State.PrevFrameNum = USB_Device_GetFrameNumber();
 	// }
 // }

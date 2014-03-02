@@ -1,12 +1,19 @@
 /*
+emulate-the-f1
+
+Version 1.0
+Christopher Albin Edmonds - christopher@tunecrew.com - http://www.tunecrew.com/
+
+Copyright (C) 2014 Christopher Albin Edmonds where applicable. See license.txt for further details on copyright, licensing and distribution of emulate-the-f1.
+
+Parts of emulate-the-f1 are adapted from the LUFA Library, and are distributed under the following license:
+
              LUFA Library
      Copyright (C) Dean Camera, 2013.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
-*/
 
-/*
   Copyright 2013  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
