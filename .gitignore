@@ -12,3 +12,6 @@
 *.lss
 *.map
 *.sym
+
+# link to LUFA
+firmware/LUFA

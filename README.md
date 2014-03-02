@@ -3,8 +3,7 @@ emulate-the-f1
 
 Version 1.0
 
-Christopher Albin Edmonds - christopher@tunecrew.com
-http://www.tunecrew.com/
+Christopher Albin Edmonds - christopher@tunecrew.com - http://www.tunecrew.com/
 
 A project to use the Arduino platform to emulate the Native Instruments Traktor Kontrol F1 and control the Remix Decks in Native Instruments Traktor DJ software.
 
