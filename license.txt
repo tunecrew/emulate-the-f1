@@ -1,0 +1,45 @@
+LICENSING
+=========
+
+emulate-the-f1 is Copyright (C) 2014 Christopher Albin Edmonds where applicable.
+
+With the exception of code covered under the LUFA section below, emulate-the-f1 is dual-licensed. For non-commericial use, the GNU Lesser General Public License applies, as described in the following copying permission statement:
+
+This file is part of emulate-the-f1.
+
+emulate-the-f1 is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+emulate-the-f1 is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along with emulate-the-f1. If not, see http://www.gnu.org/licenses/.
+
+For commercial use, please contact the author at christopher@tunecrew.com for license terms.
+
+LUFA
+====
+
+emulate-the-f1 makes use of the excellent LUFA Library, and therefore any code copied or derived from LUFA is licensed under the following conditions:
+
+                  LUFA Library
+        Copyright (C) Dean Camera, 2014.
+
+     dean [at] fourwalledcubicle [dot] com
+                www.lufa-lib.org
+
+Permission to use, copy, modify, and distribute this software
+and its documentation for any purpose is hereby granted without
+fee, provided that the above copyright notice appear in all
+copies and that both that the copyright notice and this
+permission notice and warranty disclaimer appear in supporting
+documentation, and that the name of the author not be used in
+advertising or publicity pertaining to distribution of the
+software without specific, written prior permission.
+
+The author disclaims all warranties with regard to this
+software, including all implied warranties of merchantability
+and fitness.  In no event shall the author be liable for any
+special, indirect or consequential damages or any damages
+whatsoever resulting from loss of use, data or profits, whether
+in an action of contract, negligence or other tortious action,
+arising out of or in connection with the use or performance of
+this software.
