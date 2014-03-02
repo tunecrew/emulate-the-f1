@@ -1,3 +1,14 @@
 # Mac files
 .DS_Store
 
+# build files
+*.d
+*.o
+*.bin
+*.d
+*.eep
+*.elf
+*.hex
+*.lss
+*.map
+*.sym
