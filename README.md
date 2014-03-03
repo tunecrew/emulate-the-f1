@@ -16,3 +16,7 @@ See license.txt for details on the licenses under which this software is distrib
 
 Copyright (C) 2014 Christopher Albin Edmonds where applicable.
 
+TO-DOs
+======
+
+- enable receving over USB port (to set LEDs on controllers)
