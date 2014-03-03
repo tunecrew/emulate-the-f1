@@ -11,6 +11,7 @@ You can read more about this project at:
 
 http://www.tunecrew.com/2013/06/24/emulating-the-traktor-kontrol-f1-part-1/
 http://www.tunecrew.com/2013/07/02/emulating-the-traktor-kontrol-f1-part-2/
+http://www.tunecrew.com/2014/03/02/emulating-the-traktor-kontrol-f1-part-3/
 
 See license.txt for details on the licenses under which this software is distributed.
 
