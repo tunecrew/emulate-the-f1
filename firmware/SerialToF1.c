@@ -66,12 +66,6 @@ USB_ClassInfo_HID_Device_t F1_HID_Interface =
 			},
 	};
 
-// #define SERIAL_EPSIZE                22
-/** Circular buffer to hold data from the serial port before it is sent to the host. */
-// static RingBuffer_t USARTtoUSB_Buffer;
-/** Underlying data buffer for \ref USARTtoUSB_Buffer, where the stored bytes are located. */
-// static uint8_t      USARTtoUSB_Buffer_Data[128];
-
 /** Main program entry point. This routine contains the overall program flow, including initial
  *  setup of all components and the main program loop.
  */
@@ -109,13 +103,6 @@ int main(void)
 
 				if (Endpoint_IsINReady())
 				{
-					// for (int i = 0; i < F1_REPORT_SIZE; i++)
-					// {
-					// 	ReportData[i] = 0x0f;
-					// }
-					//
-					// ReportData[0] = 0x01;
-
 					Endpoint_Write_Stream_LE(&ReportData, sizeof(ReportData), NULL);
 					Endpoint_ClearIN();
 				}
@@ -149,20 +136,17 @@ void SetupHardware(void)
 #endif
 
 	/* Hardware Initialization */
-	// LEDs_Init();
 	USB_Init();
 }
 
 /** Event handler for the library USB Connection event. */
 void EVENT_USB_Device_Connect(void)
 {
-	// LEDs_SetAllLEDs(LEDMASK_USB_ENUMERATING);
 }
 
 /** Event handler for the library USB Disconnection event. */
 void EVENT_USB_Device_Disconnect(void)
 {
-	// LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
 }
 
 /** Event handler for the library USB Configuration Changed event. */
@@ -173,8 +157,6 @@ void EVENT_USB_Device_ConfigurationChanged(void)
 	ConfigSuccess &= HID_Device_ConfigureEndpoints(&F1_HID_Interface);
 
 	USB_Device_EnableSOFEvents();
-
-	// LEDs_SetAllLEDs(ConfigSuccess ? LEDMASK_USB_READY : LEDMASK_USB_ERROR);
 }
 
 /** Event handler for the library USB Control Request reception event. */
@@ -206,13 +188,6 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                                          uint16_t* const ReportSize)
 {
 	uint8_t* Data        = (uint8_t*)ReportData;
-	// uint8_t  CurrLEDMask = LEDs_GetLEDs();
-	//
-	// Data[0] = ((CurrLEDMask & LEDS_LED1) ? 1 : 0);
-	// Data[1] = ((CurrLEDMask & LEDS_LED2) ? 1 : 0);
-	// Data[2] = ((CurrLEDMask & LEDS_LED3) ? 1 : 0);
-	// Data[3] = ((CurrLEDMask & LEDS_LED4) ? 1 : 0);
-
 	*ReportSize = F1_REPORT_SIZE;
 	return false;
 }
@@ -232,90 +207,5 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
                                           const uint16_t ReportSize)
 {
 	uint8_t* Data       = (uint8_t*)ReportData;
-	// uint8_t  NewLEDMask = LEDS_NO_LEDS;
-	//
-	// if (Data[0])
-	//   NewLEDMask |= LEDS_LED1;
-	//
-	// if (Data[1])
-	//   NewLEDMask |= LEDS_LED2;
-	//
-	// if (Data[2])
-	//   NewLEDMask |= LEDS_LED3;
-	//
-	// if (Data[3])
-	//   NewLEDMask |= LEDS_LED4;
-	//
-	// LEDs_SetAllLEDs(NewLEDMask);
 }
-
-// void F1_Send_Report_Task(USB_ClassInfo_HID_Device_t* const HIDInterfaceInfo, void* ReportData)
-// {
-// 	if (USB_DeviceState != DEVICE_STATE_Configured)
-// 	  return;
-//
-// 	// if (HIDInterfaceInfo->State.PrevFrameNum == USB_Device_GetFrameNumber())
-// 	// {
-// 	// 	#if defined(USB_DEVICE_OPT_LOWSPEED)
-// 	// 	if (!(USB_Options & USB_DEVICE_OPT_LOWSPEED))
-// 	// 	  return;
-// 	// 	#else
-// 	// 	return;
-// 	// 	#endif
-// 	// }
-//
-// 	Endpoint_SelectEndpoint(F1_OUT_EPADDR);
-// 	uint8_t Data2[SERIAL_EPSIZE];
-//
-// 	if (Endpoint_IsINReady())
-// 	{
-// 		uint8_t* Data        = (uint8_t*)ReportData;
-//
-// 		for (int i = 0; i < SERIAL_EPSIZE; i++)
-// 		{
-// 			Data2[i] = 0x00;
-// 		}
-//
-// 		Data2[0] = 0x01;
-//
-// 		Endpoint_Write_Stream_LE(&Data2, sizeof(Data2), NULL);
-// 		Endpoint_ClearIN();
-// 	}
-//
-	// if (Endpoint_IsReadWriteAllowed())
-	// {
-	// 	uint8_t  ReportINData[HIDInterfaceInfo->Config.PrevReportINBufferSize];
-	// 	uint8_t  ReportID     = 0;
-	// 	uint16_t ReportINSize = 0;
-	//
-	// 	memset(ReportINData, 0, sizeof(ReportINData));
-	//
-	// 	bool ForceSend         = CALLBACK_HID_Device_CreateHIDReport(HIDInterfaceInfo, &ReportID, HID_REPORT_ITEM_In,
-	// 	                                                             ReportINData, &ReportINSize);
-	// 	bool StatesChanged     = false;
-	// 	bool IdlePeriodElapsed = (HIDInterfaceInfo->State.IdleCount && !(HIDInterfaceInfo->State.IdleMSRemaining));
-	//
-	// 	if (HIDInterfaceInfo->Config.PrevReportINBuffer != NULL)
-	// 	{
-	// 		StatesChanged = (memcmp(ReportINData, HIDInterfaceInfo->Config.PrevReportINBuffer, ReportINSize) != 0);
-	// 		memcpy(HIDInterfaceInfo->Config.PrevReportINBuffer, ReportINData, HIDInterfaceInfo->Config.PrevReportINBufferSize);
-	// 	}
-	//
-	// 	if (ReportINSize && (ForceSend || StatesChanged || IdlePeriodElapsed))
-	// 	{
-	// 		HIDInterfaceInfo->State.IdleMSRemaining = HIDInterfaceInfo->State.IdleCount;
-	//
-	// 		Endpoint_SelectEndpoint(HIDInterfaceInfo->Config.ReportINEndpoint.Address);
-	//
-	// 		if (ReportID)
-	// 		  Endpoint_Write_8(ReportID);
-	//
-	// 		Endpoint_Write_Stream_LE(ReportINData, ReportINSize, NULL);
-	//
-	// 		Endpoint_ClearIN();
-	// 	}
-	//
-	// 	HIDInterfaceInfo->State.PrevFrameNum = USB_Device_GetFrameNumber();
-	// }
-// }
 

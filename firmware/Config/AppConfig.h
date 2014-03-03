@@ -50,6 +50,6 @@ Parts of emulate-the-f1 are adapted from the LUFA Library, and are distributed u
 #ifndef _APP_CONFIG_H_
 #define _APP_CONFIG_H_
 
-	#define F1_REPORT_SIZE       22
+	#define F1_REPORT_SIZE       22 // set to size of F1 HID report
 
 #endif

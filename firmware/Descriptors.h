@@ -91,7 +91,7 @@ Parts of emulate-the-f1 are adapted from the LUFA Library, and are distributed u
 		#define F1_OUT_EPADDR        (ENDPOINT_DIR_OUT | 1)
 
 		/** Size in bytes of the F1 HID reporting endpoint. */
-		#define F1_EPSIZE            64
+		#define F1_EPSIZE            32
 		#define DTYPE_DFUFunctional  0x21
 
 	/* Function Prototypes: */

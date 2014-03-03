@@ -77,7 +77,7 @@ Parts of emulate-the-f1 are adapted from the LUFA Library, and are distributed u
 		#define USE_FLASH_DESCRIPTORS
 //		#define USE_EEPROM_DESCRIPTORS
 //		#define NO_INTERNAL_SERIAL
-		#define FIXED_CONTROL_ENDPOINT_SIZE      0x40
+		#define FIXED_CONTROL_ENDPOINT_SIZE      32 // set to smallest size option (8, 16, 32, 64) greater than report size (22)
 //		#define DEVICE_STATE_AS_GPIOR            {Insert Value Here}
 		#define FIXED_NUM_CONFIGURATIONS         1
 //		#define CONTROL_ONLY_DEVICE
