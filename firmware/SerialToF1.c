@@ -73,44 +73,46 @@ static uint8_t ReportData[F1_REPORT_SIZE];
 
 int main(void)
 {
-	SetupHardware();
-	GlobalInterruptEnable();
-	Serial_Init(38400, false);
+    SetupHardware();
+    GlobalInterruptEnable();
+    Serial_Init(38400, false);
 
-	int ReportDataFill = 0;
+    int ReportDataFill = 0;
 
-	for (;;)
-	{
-		if (ReportDataFill < F1_REPORT_SIZE)
-		{
-			int16_t DataByte = Serial_ReceiveByte();
-			if (DataByte > -1)
-			{
-				ReportData[ReportDataFill] = DataByte;
-				ReportDataFill++;
-			}
-		}
-		else
-		{
-			ReportDataFill = 0;
+    for (;;)
+    {
+        // receive 22 bytes from the serial port (this will be from the sketch)
+        if (ReportDataFill < F1_REPORT_SIZE)
+        {
+            int16_t DataByte = Serial_ReceiveByte();
+            if (DataByte > -1)
+            {
+                ReportData[ReportDataFill] = DataByte;
+                ReportDataFill++;
+            }
+        }
+        // once ReportData is full, send it out the USB port to the computer
+        else
+        {
+            ReportDataFill = 0;
 
-			if (USB_DeviceState != DEVICE_STATE_Configured)
-			{
-			}
-			else
-			{
-				Endpoint_SelectEndpoint(F1_OUT_EPADDR);
+            if (USB_DeviceState != DEVICE_STATE_Configured)
+            {
+            }
+            else
+            {
+                Endpoint_SelectEndpoint(F1_OUT_EPADDR);
 
-				if (Endpoint_IsINReady())
-				{
-					Endpoint_Write_Stream_LE(&ReportData, sizeof(ReportData), NULL);
-					Endpoint_ClearIN();
-				}
-			}
-		}
+                if (Endpoint_IsINReady())
+                {
+                    Endpoint_Write_Stream_LE(&ReportData, sizeof(ReportData), NULL);
+                    Endpoint_ClearIN();
+                }
+            }
+        }
 
-		USB_USBTask();
-	}
+        USB_USBTask();
+    }
 }
 
 /** Configures the board hardware and chip peripherals for the demo's functionality. */
