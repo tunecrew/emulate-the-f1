@@ -2,16 +2,16 @@
 .DS_Store
 
 # build files
-*.d
-*.o
-*.bin
-*.d
-*.eep
-*.elf
-*.hex
-*.lss
-*.map
-*.sym
+firmware/*.d
+firmware/*.o
+firmware/*.bin
+firmware/*.d
+firmware/*.eep
+firmware/*.elf
+firmware/*.hex
+firmware/*.lss
+firmware/*.map
+firmware/*.sym
 
 # link to LUFA
 firmware/LUFA
